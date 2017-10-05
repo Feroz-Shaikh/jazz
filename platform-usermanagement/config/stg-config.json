@@ -1,0 +1,5 @@
+{
+  "USER_POOL_ID":"{conf_cognito_pool_id}",
+  "REGION": "{conf_region}",
+  "USER_CLIENT_ID": "{conf_cognito_client_id}"
+}
