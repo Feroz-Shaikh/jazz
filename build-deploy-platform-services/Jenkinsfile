@@ -134,7 +134,23 @@ node {
 					sh "sed -i -- 's/{conf_stack_prefix}/" + env.env_name_prefix + "/g' ./components/prod-config.json"
 				}
 				
-				if ( (service_template.trim() == "platform-services-handler") ) {
+				if ( (service_template.trim() == "platform-usermanagement") ) {
+					sh "sed -i -- 's/{conf_cognito_pool_id}/" + env.USER_POOL_ID + "/g' ./config/dev-config.json"
+					sh "sed -i -- 's/{conf_cognito_pool_id}/" + env.USER_POOL_ID + "/g' ./config/stg-config.json"
+					sh "sed -i -- 's/{conf_cognito_pool_id}/" + env.USER_POOL_ID + "/g' ./config/prod-config.json"
+                  
+					sh "sed -i -- 's/{conf_region}/" + region + "/g' ./config/dev-config.json"
+					sh "sed -i -- 's/{conf_region}/" + region + "/g' ./config/stg-config.json"
+					sh "sed -i -- 's/{conf_region}/" + region + "/g' ./config/prod-config.json"
+                  
+					sh "sed -i -- 's/{conf_cognito_client_id}/" + env.CLIENT_ID + "/g' ./config/dev-config.json"
+					sh "sed -i -- 's/{conf_cognito_client_id}/" + env.CLIENT_ID + "/g' ./config/stg-config.json"
+					sh "sed -i -- 's/{conf_cognito_client_id}/" + env.CLIENT_ID + "/g' ./config/prod-config.json"
+				}
+              
+              
+				
+				if ( (service_template.trim() == "platform-services-handler") || (service_template.trim() == "new-platform-services-handler") ) {
 					sh "sed -i -- 's/{conf-apikey}/" + env.API_ID_DEV + "/g' ./config/dev-config.json"
 					sh "sed -i -- 's/{conf-apikey}/" + env.API_ID_STG + "/g' ./config/stg-config.json"
 					sh "sed -i -- 's/{conf-apikey}/" + env.API_ID_PROD + "/g' ./config/prod-config.json"
@@ -259,6 +275,11 @@ node {
 			if ( (service_template.trim() == "platform-services-handler") ) {
           
 				sh "aws lambda  create-event-source-mapping --event-source-arn arn:aws:kinesis:$region:$roleId:stream/" + env.env_name_prefix + "-events-hub-dev --function-name arn:aws:lambda:$region:$roleId:function:" + env.env_name_prefix + "-hndlr-dev --starting-position LATEST --region " + region
+			}
+
+			if ( (service_template.trim() == "new-platform-services-handler") ) {
+          
+				sh "aws lambda  create-event-source-mapping --event-source-arn arn:aws:kinesis:$region:$roleId:stream/" + env.env_name_prefix + "-events-hub-dev --function-name arn:aws:lambda:$region:$roleId:function:" + env.env_name_prefix + "-services-handler-dev --starting-position LATEST --region " + region
 			}
 
 			
