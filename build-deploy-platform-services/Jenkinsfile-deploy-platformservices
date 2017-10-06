@@ -66,6 +66,12 @@ node {
 	   service_name_params = "platform-services-handler";
 	   sh "curl -X GET -k -v -u \"$UNAME:$PWD\"  \"" + var_job_url + "&service_name=\"" + service_name_params
        
+	   sleep(timeout_seconds)
+
+	   //Service 10 platform_services
+	   service_name_params = "platform-usermanagement";
+	   sh "curl -X GET -k -v -u \"$UNAME:$PWD\"  \"" + var_job_url + "&service_name=\"" + service_name_params
+       
 	  
 	}
   
