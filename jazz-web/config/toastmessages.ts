@@ -65,5 +65,14 @@ export const toastMessage = {
         "error404":"Your login failed. Seems like something went wrong.",
         "error500":"Your login failed. Seems like something went wrong.",
         "error0":"Your login failed, seems like we can't reach our servers."
+    },
+	"register":{
+        "success":"Your registration is successful. Please refresh and login.",
+        "fail":"Your registration failed, seems like we can't reach our servers.",
+        "error400":"Your registration failed. Seems like something went wrong.",
+        "error401":"Your registration failed. Seems like something went wrong.",
+        "error404":"Your registration failed. Seems like something went wrong.",
+        "error500":"Your registration failed. Seems like something went wrong.",
+        "error0":"Your registration failed, seems like we can't reach our servers."
     }
 };
